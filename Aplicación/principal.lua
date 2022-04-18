@@ -3,6 +3,13 @@ local composer  = require("composer")
 local widget    = require("widget")
 
 
+-- Mis accesos directos
+local centroX   = display.contentCenterX
+local centroY   = display.contentCenterY
+local ancho     = display.contentWidth
+local alto      = display.contentHeight
+
+
 -- Crear escena
 local escena = composer.newScene()
 
@@ -12,15 +19,15 @@ function escena:create(evento)
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
-    local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+    local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
     -- Crear texto para mostrar en la escena
-    local titulo = display.newText("Principal", display.contentCenterX, 125, native.systemFont, 32)
-    titulo:setFillColor(0, 0, 0)
+    -- local titulo = display.newText("Principal", display.contentCenterX, 125, native.systemFont, 32)
+    -- titulo:setFillColor(0, 0, 0)
 
     -- Crear un botón para ir a la pantalla 'juegos'
-    local boton = widget.newButton(
+    local botonPerfil = widget.newButton(
             {
                 -- Decoración
                 label       = "Perfil",
@@ -28,8 +35,8 @@ function escena:create(evento)
                 defaultFile = "Imagenes/boton-amarillo.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX,
-                y       = display.contentHeight * 0.1,
+                x       = centroX,
+                y       = alto * 0.1,
                 width   = 100,
                 height  = 40,
                 -- Función
@@ -42,11 +49,120 @@ function escena:create(evento)
             }
     )
 
+    -- Crear un marco que muestre el nombre de un juego y su descripción
+    local tarjeta = display.newGroup()
+
+    do
+        -- Crear el marco de la tarjeta
+        local marco = display.newRoundedRect(tarjeta, centroX, alto * 0.45, ancho * 0.8, alto * 0.5, 20)
+        marco:setFillColor(1, 1, 1)
+        marco.strokeWidth = 2
+        marco:setStrokeColor(0, 0, 0)
+
+        -- Crear el texto del nombre del juego
+        -- local nombre = display.newText(tarjeta, "Juego", marco.x, marco.height * 0.1, native.systemFontBold, 32)
+        local nombre = display.newText(
+                { parent = tarjeta,
+                  text = "Juego",
+                  x = marco.x,
+                  y = marco.y,
+                  width = marco.width * 0.9,
+                  height = marco.height * 0.5,
+                  font = native.systemFontBold,
+                  fontSize = 32,
+                  align = "center"
+                }
+        )
+        nombre:setFillColor(0, 0, 0)
+
+        -- Crear el texto de la descripción del juego
+        local descripcion = display.newText(
+                { parent    = tarjeta,
+                  text      = "Descripción del juego...",
+                  x         = marco.x,
+                  y         = nombre.y + nombre.y * 0.25,
+                  width     = marco.width * 0.9,
+                  height    = marco.height * 0.5,
+                  font      = native.systemFont,
+                  fontSize  = 14,
+                  align     = "left"
+                }
+        )
+        descripcion:setFillColor(0, 0, 0)
+    end
+
+    -- Crear un botón para descartar partidas
+    local botonDescartar = widget.newButton(
+            {
+                -- Decoración
+                defaultFile = "Imagenes/partida-descartar.png",
+                overFile    = "Imagenes/partida-descartar-marcado.png",
+                -- Posición y tamaño
+                x       = ancho * 0.25,
+                y       = alto * 0.8,
+                width   = ancho * 0.2,
+                height  = ancho * 0.2,
+                -- Función
+                onEvent = function(evento)
+                    -- Cargar la escena 'juegos' tras pulsar el botón
+                    if evento.phase == "ended" then
+                        -- TODO: Eliminar partida de la tabla de partidas compatibles
+                    end
+                end
+            }
+    )
+
+    -- Crear un botón para aceptar partidas
+    local botonAceptar = widget.newButton(
+            {
+                -- Decoración
+                defaultFile = "Imagenes/partida-aceptar.png",
+                overFile    = "Imagenes/partida-aceptar-marcado.png",
+                -- Posición y tamaño
+                x       = ancho * 0.75,
+                y       = alto * 0.8,
+                width   = ancho * 0.2,
+                height  = ancho * 0.2,
+                -- Función
+                onEvent = function(evento)
+                    -- Cargar la escena 'juegos' tras pulsar el botón
+                    if evento.phase == "ended" then
+                        -- TODO: Eliminar partida de la tabla de partidas compatibles y añadirla al historial de partidas
+                    end
+                end
+            }
+    )
+
+
+    -- Crear un botón para aceptar partidas
+    local botonRecargar = widget.newButton(
+            {
+                -- Decoración
+                defaultFile = "Imagenes/partida-recargar.png",
+                overFile    = "Imagenes/partida-recargar-marcado.png",
+                -- Posición y tamaño
+                x       = centroX,
+                y       = alto * 0.8,
+                width   = ancho * 0.15,
+                height  = ancho * 0.15,
+                -- Función
+                onEvent = function(evento)
+                    -- Cargar la escena 'juegos' tras pulsar el botón
+                    if evento.phase == "ended" then
+                        -- TODO: Solicitar nuevas partidas para mostrar
+                    end
+                end
+            }
+    )
+
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    vista:insert(titulo)
-    vista:insert(boton)
+    -- vista:insert(titulo)
+    vista:insert(botonPerfil)
+    vista:insert(botonDescartar)
+    vista:insert(botonAceptar)
+    vista:insert(botonRecargar)
 end
 
 
