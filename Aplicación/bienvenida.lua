@@ -15,9 +15,14 @@ function escena:create(evento)
     local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
     fondo:setFillColor(1, 1, 1)
 
+    -- Mostrar el logo de la aplicación
+    local logo = display.newImageRect("Imagenes/icono.png", display.contentWidth, display.contentWidth)
+    logo.x = display.contentCenterX
+    logo.y = display.contentHeight * 0.3
+
     -- Crear texto para mostrar en la escena
-    local titulo = display.newText("Bienvenida", display.contentCenterX, 125, native.systemFont, 32)
-    titulo:setFillColor(0, 0, 0)
+    -- local titulo = display.newText("Bienvenida", display.contentCenterX, 125, native.systemFont, 32)
+    -- titulo:setFillColor(0, 0, 0)
 
     -- Crear un botón para ir a la pantalla 'principal'
     local botonInicio = widget.newButton(
@@ -68,7 +73,8 @@ function escena:create(evento)
 
     -- Añadir todos los objetos al grupo
     grupo:insert(fondo)
-    grupo:insert(titulo)
+    -- grupo:insert(titulo)
+    grupo:insert(logo)
     grupo:insert(botonInicio)
     grupo:insert(botonRegistro)
 end
