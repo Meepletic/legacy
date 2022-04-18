@@ -52,7 +52,7 @@ function escena:create(evento)
     end
 
     -- Crear un botón para ir a la pantalla 'principal'
-    local botonSignUp = widget.newButton(
+    local boton = widget.newButton(
             {
                 -- Decoración
                 label       = "Verificar datos",
@@ -80,7 +80,7 @@ function escena:create(evento)
     vista:insert(fondo)
     -- vista:insert(titulo)
     vista:insert(formulario)
-    vista:insert(botonSignUp)
+    vista:insert(boton)
 end
 
 
