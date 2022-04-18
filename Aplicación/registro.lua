@@ -3,6 +3,13 @@ local composer  = require("composer")
 local widget    = require("widget")
 
 
+-- Mis accesos directos
+local centroX   = display.contentCenterX
+local centroY   = display.contentCenterY
+local ancho     = display.contentWidth
+local alto      = display.contentHeight
+
+
 -- Crear escena
 local escena = composer.newScene()
 
@@ -12,12 +19,37 @@ function escena:create(evento)
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
-    local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+    local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
     -- Crear texto para mostrar en la escena
-    local titulo = display.newText("Registro", display.contentCenterX, 125, native.systemFont, 32)
-    titulo:setFillColor(0, 0, 0)
+    -- local titulo = display.newText("Registro", display.contentCenterX, 125, native.systemFont, 32)
+    -- titulo:setFillColor(0, 0, 0)
+
+    -- Crear formulario de registro
+    local formulario = display.newGroup()
+
+    do
+        local cuadro = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
+        cuadro:setFillColor(1, 1, 1)
+        cuadro.strokeWidth = 2
+        cuadro:setStrokeColor(0, 0, 0)
+
+        local usuario = display.newText(formulario, "Usuario", centroX, 100, native.systemFont, 24)
+        usuario:setFillColor(0, 0, 0)
+
+        local datosUsuario = native.newTextField(centroX, 150, 200, 30)
+        datosUsuario.inputType = "no-emoji"
+        formulario:insert(datosUsuario)
+
+        local contra = display.newText(formulario, "Contraseña", centroX, 200, native.systemFont, 24)
+        contra:setFillColor(0, 0, 0)
+
+        local datosContra = native.newTextField(centroX, 250, 200, 30)
+        datosContra.isSecure = true
+        datosContra.inputType = "no-emoji"
+        formulario:insert(datosContra)
+    end
 
     -- Crear un botón para ir a la pantalla 'principal'
     local botonSignUp = widget.newButton(
@@ -28,8 +60,8 @@ function escena:create(evento)
                 defaultFile = "Imagenes/boton-verde.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX,
-                y       = display.contentHeight * 0.6,
+                x       = centroX,
+                y       = alto * 0.85,
                 width   = 110,
                 height  = 40,
                 -- Función
@@ -37,7 +69,7 @@ function escena:create(evento)
                     -- Cargar la escena 'principal' tras pulsar el botón
                     if evento.phase == "ended" then
                         -- TODO: Comprobar que el usuario no existe y crearlo
-                        composer.gotoScene("principal", { effect = "slideDown", time = 250 })
+                        composer.gotoScene("inicio", { effect = "slideDown", time = 250 })
                     end
                 end
             }
@@ -46,7 +78,8 @@ function escena:create(evento)
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    vista:insert(titulo)
+    -- vista:insert(titulo)
+    vista:insert(formulario)
     vista:insert(botonSignUp)
 end
 
