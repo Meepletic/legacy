@@ -9,7 +9,7 @@ local escena = composer.newScene()
 
 -- Ejecuta su contenido cuando la escena se crea
 function escena:create(evento)
-    local grupo = self.view
+    local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
     local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
@@ -71,18 +71,18 @@ function escena:create(evento)
     )
 
 
-    -- Añadir todos los objetos al grupo
-    grupo:insert(fondo)
-    -- grupo:insert(titulo)
-    grupo:insert(logo)
-    grupo:insert(botonInicio)
-    grupo:insert(botonRegistro)
+    -- Añadir todos los objetos a la vista
+    vista:insert(fondo)
+    -- vista:insert(titulo)
+    vista:insert(logo)
+    vista:insert(botonInicio)
+    vista:insert(botonRegistro)
 end
 
 
 -- Ejecuta su contenido cuando la escena se muestra
 function escena:show(evento)
-    local grupo = self.view
+    local vista = self.view
     local fase  = evento.phase
 
     -- La escena está a punto de ser mostrada
@@ -98,7 +98,7 @@ end
 
 -- Ejecuta el contenido cuando se oculta la escena
 function escena:hide(evento)
-    local grupo = self.view
+    local vista = self.view
     local fase  = evento.phase
 
     -- La escena está a punto de ser ocultada
@@ -114,7 +114,7 @@ end
 
 -- Ejecuta el contenido cuando se elimina la escena
 function escena:destroy(evento)
-    local grupo = self.view
+    local vista = self.view
 
     -- TODO
 end
