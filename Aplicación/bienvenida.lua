@@ -30,54 +30,59 @@ function escena:create(evento)
 
     -- Mostrar el logo de la aplicación
     local logo = display.newImageRect("Imagenes/icono.png", ancho, ancho)
-    logo.x = display.contentCenterX
-    logo.y = display.contentHeight * 0.3
+    logo.x = centroX
+    logo.y = alto * 0.3
 
     -- Crear un botón para ir a la pantalla 'principal'
     local botonInicio = widget.newButton(
-            {
-                -- Decoración
-                label       = "Iniciar sesión",
-                labelColor  = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
-                defaultFile = "Imagenes/boton-azul.png",
-                overFile    = "Imagenes/boton-marcado.png",
-                -- Posición y tamaño
-                x       = centroX,
-                y       = alto * 0.6,
-                width   = 100,
-                height  = 40,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'inicio' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        composer.gotoScene("inicio", { effect = "slideDown", time = 250 })
-                    end
+        {
+            -- Decoración
+            label       = "Iniciar sesión",
+            fontSize    = ancho / alto,
+            labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
+            defaultFile = "Imagenes/boton-azul.png",
+            overFile    = "Imagenes/boton-marcado.png",
+            -- Posición y tamaño
+            x       = centroX,
+            y       = alto * 0.6,
+            width   = ancho * 0.5,
+            height  = alto * 0.1,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'inicio' tras pulsar el botón
+                if evento.phase == "ended" then
+                    composer.gotoScene("inicio", { effect = "slideDown", time = 250 })
                 end
-            }
+            end
+        }
     )
 
     -- Crear un botón para ir a la pantalla 'principal'
     local botonRegistro = widget.newButton(
-            {
-                -- Decoración
-                label       = "Crear cuenta",
-                labelColor  = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
-                defaultFile = "Imagenes/boton-verde.png",
-                overFile    = "Imagenes/boton-marcado.png",
-                -- Posición y tamaño
-                x       = centroX,
-                y       = alto * 0.8,
-                width   = 100,
-                height  = 40,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'registro' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        composer.gotoScene("registro", { effect = "slideUp", time = 250 })
-                    end
+        {
+            -- Decoración
+            label       = "Registrarse",
+            fontSize    = ancho / alto,
+            labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
+            defaultFile = "Imagenes/boton-verde.png",
+            overFile    = "Imagenes/boton-marcado.png",
+            -- Posición y tamaño
+            x       = centroX,
+            y       = alto * 0.8,
+            width   = ancho * 0.5,
+            height  = alto * 0.1,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'registro' tras pulsar el botón
+                if evento.phase == "ended" then
+                    composer.gotoScene("registro", { effect = "slideUp", time = 250 })
                 end
-            }
+            end
+        }
     )
+
+    local tamano = display.newText(ancho.." x "..alto, centroX, alto * 0.1, native.systemFont, 60)
+    tamano:setFillColor(0, 0, 0)
 
 
     -- Añadir todos los objetos a la vista
@@ -85,19 +90,19 @@ function escena:create(evento)
     vista:insert(logo)
     vista:insert(botonInicio)
     vista:insert(botonRegistro)
+    vista:insert(tamano)
 end
 
 
 -- Ejecuta su contenido cuando la escena se muestra
 function escena:show(evento)
-    local vista = self.view
     local fase  = evento.phase
 
     -- La escena está a punto de ser mostrada
     if fase == "will" then
         print(ACTUAL..":\tLa escena se va a mostrar.")
 
-        -- Llamado cuando la escena se ha mostrado
+    -- Llamado cuando la escena se ha mostrado
     elseif fase == "did" then
         print(ACTUAL..":\tLa escena se ha mostrado.")
     end
@@ -106,7 +111,6 @@ end
 
 -- Ejecuta el contenido cuando se oculta la escena
 function escena:hide(evento)
-    local vista = self.view
     local fase  = evento.phase
 
     -- La escena está a punto de ser ocultada
@@ -126,7 +130,7 @@ end
 function escena:destroy(evento)
     print(ACTUAL..":\tLa escena se ha eliminado.")
 
-    local vista = self.view
+    -- local vista = self.view
 end
 
 ---------------------------------------------------------------------------------
