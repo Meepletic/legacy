@@ -34,49 +34,50 @@ function escena:create(evento)
     local formulario = display.newGroup()
 
     do
-        local cuadro = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
-        cuadro:setFillColor(1, 1, 1)
-        cuadro.strokeWidth = 2
-        cuadro:setStrokeColor(0, 0, 0)
+        local marco = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
+        marco:setFillColor(1, 1, 1)
+        marco.strokeWidth = 7.5
+        marco:setStrokeColor(0, 0, 0)
 
-        local usuario = display.newText(formulario, "Usuario", centroX, 100, native.systemFont, 24)
+        local usuario = display.newText(formulario, "Usuario", centroX, marco.y - marco.height * 0.25, native.systemFontBold, ancho / alto)
         usuario:setFillColor(0, 0, 0)
 
-        local datosUsuario = native.newTextField(centroX, 150, 200, 30)
+        local datosUsuario = native.newTextField(centroX, marco.y - marco.height * 0.15, ancho * 0.7, alto / 25)
         datosUsuario.inputType = "no-emoji"
         formulario:insert(datosUsuario)
 
-        local contra = display.newText(formulario, "Contraseña", centroX, 200, native.systemFont, 24)
+        local contra = display.newText(formulario, "Contraseña", centroX, marco.y + marco.height * 0.1, native.systemFontBold, ancho / alto)
         contra:setFillColor(0, 0, 0)
 
-        local datosContra = native.newTextField(centroX, 250, 200, 30)
-        datosContra.isSecure = true
+        local datosContra = native.newTextField(centroX, marco.y + marco.height * 0.2, ancho * 0.7, alto / 25)
         datosContra.inputType = "no-emoji"
+        datosContra.isSecure = true
         formulario:insert(datosContra)
     end
 
     -- Crear un botón para ir a la pantalla 'principal'
     local boton = widget.newButton(
-            {
-                -- Decoración
-                label       = "Verificar datos",
-                labelColor  = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
-                defaultFile = "Imagenes/boton-verde.png",
-                overFile    = "Imagenes/boton-marcado.png",
-                -- Posición y tamaño
-                x       = centroX,
-                y       = alto * 0.85,
-                width   = 110,
-                height  = 40,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'principal' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        -- TODO: Comprobar que el usuario no existe y crearlo
-                        composer.gotoScene("inicio", { effect = "slideDown", time = 250 })
-                    end
+        {
+            -- Decoración
+            label       = "Verificar datos",
+            fontSize    = ancho / alto,
+            labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
+            defaultFile = "Imagenes/boton-verde.png",
+            overFile    = "Imagenes/boton-marcado.png",
+            -- Posición y tamaño
+            x       = centroX,
+            y       = alto * 0.85,
+            width   = ancho * 0.5,
+            height  = alto * 0.1,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'principal' tras pulsar el botón
+                if evento.phase == "ended" then
+                    -- TODO: Comprobar que el usuario no existe y crearlo
+                    composer.gotoScene("inicio", { effect = "slideDown", time = 250 })
                 end
-            }
+            end
+        }
     )
 
 
