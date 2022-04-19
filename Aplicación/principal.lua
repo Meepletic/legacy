@@ -22,10 +22,6 @@ function escena:create(evento)
     local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
-    -- Crear texto para mostrar en la escena
-    -- local titulo = display.newText("Principal", display.contentCenterX, 125, native.systemFont, 32)
-    -- titulo:setFillColor(0, 0, 0)
-
     -- Crear un botón para ir a la pantalla 'juegos'
     local botonPerfil = widget.newButton(
             {
@@ -158,7 +154,7 @@ function escena:create(evento)
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    -- vista:insert(titulo)
+    vista:insert(tarjeta)
     vista:insert(botonPerfil)
     vista:insert(botonDescartar)
     vista:insert(botonAceptar)
@@ -205,6 +201,25 @@ function escena:destroy(evento)
     -- TODO
 end
 
+
+-- Ejecuta el contenido al pulsarse una tecla o botón del móvil
+local function pulsacion(evento)
+
+    -- Si se pulsa la tecla 'atrás' ('back') en Android, evita que se salga de la aplicación
+    if (evento.keyName == "back") then
+        if (system.getInfo("platform") == "android") then
+            -- Volver a la escena anterior
+            composer.gotoScene("bienvenida", { effect = "slideDown", time = 250 })
+
+            return true
+        end
+    end
+
+    -- ¡Importante! Devuelve 'falso' para indicar que esta aplicación NO está sobreescribiendo la tecla recibida,
+    -- de esta forma, el sistema operativo ejecutará su gestor predeterminado para la tecla
+    return false
+end
+
 ---------------------------------------------------------------------------------
 
 -- Configuración de los listeners
@@ -212,6 +227,8 @@ escena:addEventListener("create", escena)
 escena:addEventListener("show", escena)
 escena:addEventListener("hide", escena)
 escena:addEventListener("destroy", escena)
+
+Runtime:addEventListener("key", pulsacion)
 
 ---------------------------------------------------------------------------------
 
