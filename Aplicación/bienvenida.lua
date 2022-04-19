@@ -3,26 +3,35 @@ local composer  = require("composer")
 local widget    = require("widget")
 
 
+-- Mis accesos directos
+-- Pantalla
+local centroX   = display.contentCenterX
+local centroY   = display.contentCenterY
+local ancho     = display.contentWidth
+local alto      = display.contentHeight
+
+-- Escenas
+local ACTUAL    = composer.getSceneName("current")
+
+
 -- Crear escena
 local escena = composer.newScene()
 
 
 -- Ejecuta su contenido cuando la escena se crea
 function escena:create(evento)
+    print("\nEscena creada:\t"..ACTUAL)
+
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
-    local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+    local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
     -- Mostrar el logo de la aplicación
-    local logo = display.newImageRect("Imagenes/icono.png", display.contentWidth, display.contentWidth)
+    local logo = display.newImageRect("Imagenes/icono.png", ancho, ancho)
     logo.x = display.contentCenterX
     logo.y = display.contentHeight * 0.3
-
-    -- Crear texto para mostrar en la escena
-    -- local titulo = display.newText("Bienvenida", display.contentCenterX, 125, native.systemFont, 32)
-    -- titulo:setFillColor(0, 0, 0)
 
     -- Crear un botón para ir a la pantalla 'principal'
     local botonInicio = widget.newButton(
@@ -33,8 +42,8 @@ function escena:create(evento)
                 defaultFile = "Imagenes/boton-azul.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX,
-                y       = display.contentHeight * 0.6,
+                x       = centroX,
+                y       = alto * 0.6,
                 width   = 100,
                 height  = 40,
                 -- Función
@@ -56,8 +65,8 @@ function escena:create(evento)
                 defaultFile = "Imagenes/boton-verde.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX,
-                y       = display.contentHeight * 0.8,
+                x       = centroX,
+                y       = alto * 0.8,
                 width   = 100,
                 height  = 40,
                 -- Función
@@ -73,7 +82,6 @@ function escena:create(evento)
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    -- vista:insert(titulo)
     vista:insert(logo)
     vista:insert(botonInicio)
     vista:insert(botonRegistro)
@@ -87,11 +95,11 @@ function escena:show(evento)
 
     -- La escena está a punto de ser mostrada
     if fase == "will" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se va a mostrar.")
 
         -- Llamado cuando la escena se ha mostrado
     elseif fase == "did" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se ha mostrado.")
     end
 end
 
@@ -103,20 +111,22 @@ function escena:hide(evento)
 
     -- La escena está a punto de ser ocultada
     if fase == "will" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se va a ocultar.")
 
         -- Llamado cuando la escena se ha ocultado
     elseif fase == "did" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se ha ocultado.")
+
+        composer.removeScene("bienvenida")
     end
 end
 
 
 -- Ejecuta el contenido cuando se elimina la escena
 function escena:destroy(evento)
-    local vista = self.view
+    print(ACTUAL..":\tLa escena se ha eliminado.")
 
-    -- TODO
+    local vista = self.view
 end
 
 ---------------------------------------------------------------------------------
