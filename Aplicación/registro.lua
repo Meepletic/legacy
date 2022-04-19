@@ -4,10 +4,16 @@ local widget    = require("widget")
 
 
 -- Mis accesos directos
+-- Pantalla
 local centroX   = display.contentCenterX
 local centroY   = display.contentCenterY
 local ancho     = display.contentWidth
 local alto      = display.contentHeight
+
+-- Escenas
+local ACTUAL    = composer.getSceneName("current")
+local ANTERIOR  = composer.getSceneName("previous")
+local OVERLAY  = composer.getSceneName("overlay")
 
 
 -- Crear escena
@@ -16,15 +22,13 @@ local escena = composer.newScene()
 
 -- Ejecuta su contenido cuando la escena se crea
 function escena:create(evento)
+    print("\nEscena creada:\t"..ACTUAL)
+
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
     local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
-
-    -- Crear texto para mostrar en la escena
-    -- local titulo = display.newText("Registro", display.contentCenterX, 125, native.systemFont, 32)
-    -- titulo:setFillColor(0, 0, 0)
 
     -- Crear formulario de registro
     local formulario = display.newGroup()
@@ -78,7 +82,6 @@ function escena:create(evento)
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    -- vista:insert(titulo)
     vista:insert(formulario)
     vista:insert(boton)
 end
@@ -91,11 +94,11 @@ function escena:show(evento)
 
     -- La escena está a punto de ser mostrada
     if fase == "will" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se está mostrando.")
 
         -- Llamado cuando la escena se ha mostrado
     elseif fase == "did" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se ha mostrado.")
     end
 end
 
@@ -107,11 +110,14 @@ function escena:hide(evento)
 
     -- La escena está a punto de ser ocultada
     if fase == "will" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se está ocultando.")
+
 
         -- Llamado cuando la escena se ha ocultado
     elseif fase == "did" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se ha ocultado.")
+
+        composer.removeScene("registro")
     end
 end
 
@@ -120,7 +126,26 @@ end
 function escena:destroy(evento)
     local vista = self.view
 
-    -- TODO
+    print(ACTUAL..":\tLa escena se ha eliminado.")
+end
+
+
+-- Ejecuta el contenido al pulsarse una tecla o botón del móvil
+local function pulsacion(evento)
+
+    -- Si se pulsa la tecla 'atrás' ('back') en Android, evita que se salga de la aplicación
+    if (evento.keyName == "back") then
+        if (system.getInfo("platform") == "android") then
+            -- Volver a la escena anterior
+            composer.gotoScene("bienvenida", { effect = "slideUp", time = 250 })
+
+            return true
+        end
+    end
+
+    -- ¡Importante! Devuelve 'falso' para indicar que esta aplicación NO está sobreescribiendo la tecla recibida,
+    -- de esta forma, el sistema operativo ejecutará su gestor predeterminado para la tecla
+    return false
 end
 
 ---------------------------------------------------------------------------------
@@ -130,6 +155,8 @@ escena:addEventListener("create", escena)
 escena:addEventListener("show", escena)
 escena:addEventListener("hide", escena)
 escena:addEventListener("destroy", escena)
+
+Runtime:addEventListener("key", pulsacion)
 
 ---------------------------------------------------------------------------------
 
