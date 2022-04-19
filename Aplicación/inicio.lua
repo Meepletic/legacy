@@ -4,10 +4,14 @@ local widget    = require("widget")
 
 
 -- Mis accesos directos
+-- Pantalla
 local centroX   = display.contentCenterX
 local centroY   = display.contentCenterY
 local ancho     = display.contentWidth
 local alto      = display.contentHeight
+
+-- Escenas
+local ACTUAL    = composer.getSceneName( "current" )
 
 
 -- Crear escena
@@ -16,24 +20,22 @@ local escena = composer.newScene()
 
 -- Ejecuta su contenido cuando la escena se crea
 function escena:create(evento)
+    print("\nEscena creada:\t"..ACTUAL)
+
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
     local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
-    -- Crear texto para mostrar en la escena
-    -- local titulo = display.newText("Inicio de sesión", display.contentCenterX, 125, native.systemFont, 32)
-    -- titulo:setFillColor(0, 0, 0)
-
     -- Crear formulario de inicio de sesión
     local formulario = display.newGroup()
 
     do
-        local cuadro = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
-        cuadro:setFillColor(1, 1, 1)
-        cuadro.strokeWidth = 2
-        cuadro:setStrokeColor(0, 0, 0)
+        local marco = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
+        marco:setFillColor(1, 1, 1)
+        marco.strokeWidth = 2
+        marco:setStrokeColor(0, 0, 0)
 
         local usuario = display.newText(formulario, "Usuario", centroX, 100, native.systemFont, 24)
         usuario:setFillColor(0, 0, 0)
@@ -46,8 +48,8 @@ function escena:create(evento)
         contra:setFillColor(0, 0, 0)
 
         local datosContra = native.newTextField(centroX, 250, 200, 30)
-        datosContra.isSecure = true
         datosContra.inputType = "no-emoji"
+        datosContra.isSecure = true
         formulario:insert(datosContra)
     end
 
@@ -78,7 +80,6 @@ function escena:create(evento)
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
-    -- vista:insert(titulo)
     vista:insert(formulario)
     vista:insert(boton)
 end
@@ -92,15 +93,17 @@ function escena:show(evento)
     -- La escena está a punto de ser mostrada
     if fase == "will" then
         -- TODO
+        print(ACTUAL..":\tLa escena se está mostrando.")
 
         -- Llamado cuando la escena se ha mostrado
     elseif fase == "did" then
         -- TODO
+        print(ACTUAL..":\tLa escena se ha mostrado.")
     end
 end
 
 
--- Ejecuta el contenido cuando se oculta la escena
+-- Ejecuta el contenido cuando la escena se oculta
 function escena:hide(evento)
     local vista = self.view
     local fase  = evento.phase
@@ -108,19 +111,44 @@ function escena:hide(evento)
     -- La escena está a punto de ser ocultada
     if fase == "will" then
         -- TODO
+        print(ACTUAL..":\tLa escena se está ocultando.")
 
         -- Llamado cuando la escena se ha ocultado
     elseif fase == "did" then
-        -- TODO
+        print(ACTUAL..":\tLa escena se ha ocultado.")
+
+        composer.removeScene("inicio")
+        -- datosUsuario:removeSelf()   -- Las variables deben ser
+        -- datosContra:removeSelf()    -- globales para accederlas
     end
 end
 
 
--- Ejecuta el contenido cuando se elimina la escena
+-- Ejecuta el contenido cuando la escena se elimina
 function escena:destroy(evento)
     local vista = self.view
 
     -- TODO
+    print("incicio.lua:\tLa escena se ha eliminado.")
+end
+
+
+-- Ejecuta el contenido al pulsarse una tecla o botón del móvil
+local function pulsacion(evento)
+
+    -- Si se pulsa la tecla 'atrás' ('back') en Android, evita que se salga de la aplicación
+    if (evento.keyName == "back") then
+        if (system.getInfo("platform") == "android") then
+            -- Volver a la escena anterior
+            composer.gotoScene("bienvenida", { effect = "slideDown", time = 250 })
+
+            return true
+        end
+    end
+
+    -- ¡Importante! Devuelve 'falso' para indicar que esta aplicación NO está sobreescribiendo la tecla recibida,
+    -- de esta forma, el sistema operativo ejecutará su gestor predeterminado para la tecla
+    return false
 end
 
 ---------------------------------------------------------------------------------
@@ -130,6 +158,8 @@ escena:addEventListener("create", escena)
 escena:addEventListener("show", escena)
 escena:addEventListener("hide", escena)
 escena:addEventListener("destroy", escena)
+
+Runtime:addEventListener("key", pulsacion)
 
 ---------------------------------------------------------------------------------
 
