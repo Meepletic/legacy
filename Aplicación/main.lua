@@ -8,4 +8,4 @@ display.setStatusBar(display.DefaultStatusBar)
 
 
 -- Iniciar la aplicación en la ventana de inicio
-composer.gotoScene("bienvenida", {effect = "fade", time = 500})  -- Iniciar sesión
+composer.gotoScene("bienvenida", {effect = "fade", time = 500})
