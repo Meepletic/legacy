@@ -81,16 +81,12 @@ function escena:create(evento)
         }
     )
 
-    local tamano = display.newText(ancho.." x "..alto, centroX, alto * 0.1, native.systemFont, 60)
-    tamano:setFillColor(0, 0, 0)
-
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
     vista:insert(logo)
     vista:insert(botonInicio)
     vista:insert(botonRegistro)
-    vista:insert(tamano)
 end
 
 
