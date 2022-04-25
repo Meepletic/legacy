@@ -1,19 +1,33 @@
 \chapter{Introducción}
 
     \section{Motivación}
+    \label{intro:motiv}
 
-        Actualmente, los juegos de mesa han pasado a un segundo plano frente a otras formas de entretenimiento más modernas y dinámicas: los videojuegos, cada vez más realistas e inmersivos, y los servicios de series y películas, cuyo contenido se amplía tras cada estreno o exclusiva, son los principales alicientes de que los juegos de mesa poco a poco se vuelvan un tema menos frecuente del que hablar.
+        Actualmente, los juegos de mesa han pasado a un segundo -o incluso tercer- plano frente a otras formas de entretenimiento más modernas y dinámicas: los videojuegos, cada vez más realistas e inmersivos, y los servicios de series y películas, cuyo contenido se amplía tras cada estreno o exclusiva, son los principales alicientes para que los juegos de mesa, poco a poco, se vuelvan un tema menos frecuente del que hablar.
 
-        Sin embargo, siguen existiendo personas cuya principal afición es juntarse alrededor de una mesa para jugar, comunicarse y mantener ese contacto e interacción que ofrece una partida en vivo.
+        % TODO: expandir un poco más.
 
-        Precisamente por esa escasez de jugadores activos, sucede que: en bastantes ocasiones no se alcanza el número mínimo o adecuado de jugadores para un determinado juego de mesa; o por el contrario, hay jugadores más que suficientes pero tantos juegos donde elegir, que resulta tedioso tomar una decisión.
+        Sin embargo, siguen existiendo personas cuya principal afición es juntarse alrededor de un buen juego, comunicarse y mantener ese contacto e interacción que ofrece una partida en vivo.
+
+        Tras comentar esta situación, sucede que en bastantes ocasiones, precisamente por esa escasez de jugadores activos:
+
+        \begin{itemize}
+
+            \item Si se establece un juego de mesa determinado, no siempre se alcanza el número mínimo o adecuado de jugadores.
+            \item Si hay jugadores más que suficientes, suele ser difícil elegir el juego de mesa debido a la gran cantidad de opciones.
+
+        \end{itemize}
 
         Para resolver esos dos inconvenientes, se plantea crear una herramienta en formato de aplicación Android que facilite el descubrimiento (y posterior conexión) de personas con las que organizar partidas de juegos de mesa, para que puedan reunirse y jugar, y cuya principal función sea la de descubrir partidas cercanas mediante geolocalización.
+
+        \newpage
 
 
     \section{Objetivos}
 
-        Este trabajo de fin de grado pretende reducir o resolver los inconvenientes previamente planteados, creando una aplicación Android simple que permita a sus usuarios:
+        % TODO: revisar toda la sección.
+
+        Como se comentó en la sección anterior \ref{intro:motiv}, este trabajo de fin de grado pretende reducir o resolver los inconvenientes previamente planteados creando una aplicación Android simple que permita a sus usuarios:
 
         \begin{itemize}
 
@@ -25,28 +39,175 @@
 
         \end{itemize}
 
+        \vskip 1 cm
+
+        La aplicación hará uso de una base de datos que gestionará la información de los usuarios, los juegos registrados y las partidas creadas. Por tanto, también se realizará una base de datos capaz de:
+
+        \begin{itemize}
+
+            \item Registrar diferentes juegos de mesa y gestionar las nuevas entradas.
+            \item Registrar diferentes partidas y sus participantes (jugadores).
+            \item Registrar diferentes usuarios y sus contraseñas.
+
+        \end{itemize}
+
+        \vskip 1 cm
+
+        La conexión entre la aplicación y la base de datos es lo produce el efecto final esperado.
+
         \newpage
 
 
     \section{Estado del arte}
 
-        Para la realización de este trabajo de fin de grado se ha empleado:
+        En relación a los juegos de mesa, la idea de descubrir y conectar con otras personas no es nueva: durante el desarrollo de Internet han ido surgiendo herramientas que cumplen este fin, ya sea de forma central o como una de las muchas posibilidades que ofrece un servicio; pero no siempre ha sido así y de hecho, como se mencionó en la sección de Motivación \ref{intro:motiv}, la clave de los juegos de mesa es el contacto y la cercanía real, por lo que tiene sentido que antes de toda esta digitalización la gente conociera a otras personas con las que jugar.
 
-        \begin{itemize}
+        Es decir, los jugadores no están totalmente aislados en absoluto, la posibilidad siempre ha estado ahí.
 
-            \item Lua, un lenguaje de programación ligero, flexible y potente que es comúnmente utilizado en el desarrollo de videojuegos y aplicaciones Android.
-            \item MySQL, un gestor de bases de datos común y de los más utilizados.
-            \item IntelliJ IDEA, un entorno de programación creado por Jetbrains con amplias capacidades y uno de los mejores actualmente.
-            \item DataGrip, un entorno de gestión de bases de datos, creado también por Jetbrains.
 
-        \end{itemize}
+        \subsection{Medios tradicionales}
 
+            El fin común de estos medios es reunir gente físicamente entorno a un acontecimiento o evento, lo que permite a las personas interaccionar entre ellas y conocer nuevos jugadores potenciales y nuevos juegos de mesa.
+
+            \paragraph{Tiendas de juegos de mesa}
+
+                Es común en muchas tiendas programar eventos de cierto juego en concreto o incluso dedicar un día a la semana para organizar encuentros libres, donde las personas asisten solas o con amigos para jugar allí en un ambiente mucho más inmersivo y con la posibilidad de conocer a gente nueva interesada en el hobby que también esté participando al mismo tiempo.
+
+            \paragraph{Convenciones}
+
+                % TODO: revisar más tarde.
+
+                Estos eventos que tienen lugar normalmente una vez al año, reúnen a muchísimas personas de la zona donde se realizan y sus alrededores. Además, debido al tamaño del evento, suelen atraer a gente que no está especialmente ligada al hobby, por lo que fomenta su descubrimiento.
+
+                Las personas que acuden a las convenciones se encuentran con zonas de juegos habilitadas para probar los últimos títulos, conocer grupos interesados y participar en torneos que tiene lugar durante la duración de la convención.
+
+
+        \subsection{Medios digitales}
+
+            El fin común de estos medios es descubrir y conectar a personas interesadas en los juegos de mesa, para que puedan reunirse físicamente y jugar partidas; a diferencia de los medios tradicionales, se centran más en la inmediatez.
+
+            % TODO: expandir ampliamente todos los medios posibles y modificar la bibliografía.
+
+            \paragraph{BoardGameGeek}
+
+                Esta página web \cite{BGG} creada en el año 2000 contiene una enorme base de datos de juegos de mesa y permite a sus usuarios registrarse, dando lugar a funciones básicas de redes sociales como el intercambio de mensajes y la creación de eventos que, en este caso, tienen lugar en forma de partidas o sesiones de juegos de mesa.
+
+                Podría considerarse por todos aquellos jugadores habituales como la biblioteca de Alejandría \cite{Biblioteca-Alejandria} de los juegos de mesa: si un juego existe, por extraño, limitado y raro que sea, es posible que alguien ya lo haya añadido a la base de datos.
+
+                \subparagraph{Funciones}
+
+                    Crear usuarios, registrar juegos de mesa en la plataforma, asociar juegos de mesa a los usuarios, definir encuentros entre usuarios, intercambio de mensajes entre usuarios...
+
+            \paragraph{Discord}
+
+                Actualmente una de las aplicaciones más populares (si no la más popular) de comunicación VOIP e intercambio de mensajes \cite{Discord}. Iniciando en 2015 con el fin de sobrepasar a Skype y TeamSpeak en el territorio de la comunicación en videojuegos, sufrió un gran incremento de uso diario dirante los años de la pandemia del COVID-19, lo que hizo que aumentaran sus capacidades y funcionalidades, por lo que terminó convirtiéndose en una aplicación de comunicación multipropósito.
+
+                Precisamente esa familiaridad con el programa, su amplio número de usuarios y su alta flexibilidad, han permitido que sea posible gestionar partidas de juegos de mesa y otras comunidades que giren alrededor de este hobby.
+
+                Cabe destacar que esta aplicación es mayormente usada por gente joven y aquellos relacionados con la informática.
+
+                \subparagraph{Funciones}
+
+                    Crear usuarios, crear o unirse a servidores, crear o unirse a canales de texto o de voz, gestión de permisos con roles, intercambio de mensajes con formato Markdown entre usuarios, comunicación por voz y/o vídeo entre usuarios...
+
+
+            \paragraph{Facebook}
+
+                Una de las redes sociales más famosa del mundo, con miles de millones de usuarios.
+
+                Esta plataforma permite la creación de grupos y eventos, por lo que existen diversos grupos locales de juegos de mesa donde la gente puede participar y quedar para jugar.
+
+                \subparagraph{Funciones}
+
+                    Crear usuarios, crear publicaciones, crear o unirse a grupos, crear o unirse a eventos, intercambio de mensajes entre usuarios...
+
+                    \newpage
+
+
+    \section{Metodología del trabajo empleada}
+    \label{intro:met}
+
+        Para la elaboración de este proyecto se ha empleado un \textbf{desarrollo incremental}, que consiste en, partiendo de una base, añadirle sucesivas mejoras sin que estas perjudiquen al resto del proyecto desarrollado hasta el momento.
+
+        % TODO: revisar más tarde cómo está expresado esto.
+
+        Al tratarse del desarrollo de un software, era imprescindible -y prácticamente, trivial- el uso de un controlador de versiones, para el que se ha elegido trabajar con Git y Github; y además, se ha hecho uso de la funcionalidad de \textit{Proyectos} que ofrece esta plataforma.
+
+        % TODO: ¿Mencionar también Git y Github?
+
+        \subsection{Tableros Kanban}
+
+            Este método consiste en la clasificación de tareas (tarjetas) en diferentes estados (columnas) a medida que se trabaja en cada una de ellas. Su simpleza y su flexibilidad permite que pueda aplicarse a flujos de trabajos ya implementados como medida adicional de progreso y organización.
+
+            Como se mencionó en la sección \ref{intro:met}, Github ofrece una función de visualización de proyectos, que resultan ser como tableros Kanban, que pueden ser manuales (como en este caso) o automatizados con los \textit{Issues} de esa misma plataforma.
+
+            \begin{figure*}[h]
+
+                \centering
+                \includegraphics[scale=0.2]{images/progreso-app.png}
+                \caption{\textit{Proyecto} de Github de la aplicación Android}
+
+            \end{figure*}
+
+            La composición elegida para todos los tableros Kanban del proyecto ha sido:
+
+            \begin{itemize}
+
+                \item \textbf{Pendientes}: tareas que aún no han sido tratadas de ninguna forma. Corresponden a conceptos nacidos de lluvias de ideas o que representan requisitos de la aplicación.
+
+                \item \textbf{En Progreso}: tareas que están siendo trabajadas. No debe trabajarse en demasiadas tareas a la vez o puede producirse un cuello de botella en el desarrollo.
+
+                \item \textbf{Revisión}: tareas que han sido completadas, pero que requieren un último vistazo para probar que verdaderamente están listas y no necesitan más atención.
+
+                \item \textbf{Completadas}: tareas que han sido trabajadas y revisadas. Terminadas definitivamente.
+
+            \end{itemize}
+
+            \newpage
+
+
+            Esta herramienta también incluye una pequeña barra de progreso -que debe activarse en el menú del \textit{Proyecto}- y permite al usuario verificar el estado de las tareas, según el tablero descrito: en verde, las tareas marcadas como terminadas; en morado, las tareas en progreso o que necesitan revisión. Este diseño bicolor favorece la interpretación de una forma simple y directa.
+
+            \begin{figure*}[h]
+            \label{figura:proyectos}
+
+                % TODO: revisar el comentario de la figura.
+
+                \centering
+                \includegraphics[scale=0.35]{images/progreso-resumen.png}
+                \caption{Resumen del desarrollo del proyecto, dividido en \textit{Proyectos}}
+
+            \end{figure*}
+
+            \newpage
+
+
+    % TODO: ¿Hasta qué punto es necesario explicar la estructura habiendo un índice?
 
     \section{Estructura de la memoria}
 
-        Este documento está dividido en capítulos correspondientes a las fases de desarrollo que se establecieron para llevar a cabo el proyecto.
+        Este documento está dividido en capítulos correspondientes a las fases de desarrollo que se establecieron para llevar a cabo el proyecto, exceptuando aquellos que dan forma propia de memoria de trabajo de fin de grado, como son la introducción y las conclusiones finales:
 
-        % TODO
+        \begin{itemize}
+
+            \item \textbf{Capítulo de introducción}: el capítulo actual, contiene el preámbulo formal donde se describe la idea y el contenido de este documento.
+
+            \item \textbf{Capítulo de investigación y estudio}: describe la fase previa a la implementación de la aplicación donde se analizaron distintas herramientas con el objetivo de aplicarlas al proyecto.
+
+            \item \textbf{Capítulo de diseño}: contiene imágenes acerca del aspecto de la aplicación y diagramas sobre del funcionamiento de la misma, así como una descripción de los requisitos.
+
+            % TODO: revisar los "requisitos"
+
+            \item \textbf{Capítulo de implementación}: describe el proceso de creación de la aplicación y el establecimiento de la base de datos.
+
+            \item \textbf{Capítulo de correcciones y mejoras}: describe la última parte del proyecto en el que la aplicación, siendo funcional, es usada y probada con el fin de mejorarse añadiendo nuevas funciones o corrigiendo fallos.
+
+            \item \textbf{Capítulo de conclusiones}: trata acerca de los resultados obtenidos durante o tras la realización del proyecto, así como las posibles líneas futuras del mismo.
+
+        \end{itemize}
+
+        Finalmente, el documento cierra con la \textbf{bibliografía} y un \textbf{apéndice}, correspondiente al manual de usuario de la aplicación.
+
 
 \cleardoublepage
 
@@ -60,6 +221,7 @@
     \section{Lua}
 
         Lua es un lenguaje de programación extensible, que ofrece buen soporte tanto para programación orientada a objetos, como para la programación funcional y la programación orientada a datos. Se busca que sea empleado como un lenguaje de script ligero pero potente, para que extienda cualquier programa que lo considere necesario: por tanto, al ser un lenguaje que extiende la función de otro, carece del concepto de programa principal, por lo que funciona embebido al programa anfitrión que lo utiliza.
+
 
         \subsection{Módulos empleados}
 
