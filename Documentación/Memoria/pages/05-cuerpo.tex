@@ -217,20 +217,140 @@
 
     Durante esta fase, se realizó una búsqueda de tecnologías y recursos que pudieran tener cabida en el proyecto de la aplicación Android.
 
-
-    \section{Lua}
-
-        Lua es un lenguaje de programación extensible, que ofrece buen soporte tanto para programación orientada a objetos, como para la programación funcional y la programación orientada a datos. Se busca que sea empleado como un lenguaje de script ligero pero potente, para que extienda cualquier programa que lo considere necesario: por tanto, al ser un lenguaje que extiende la función de otro, carece del concepto de programa principal, por lo que funciona embebido al programa anfitrión que lo utiliza.
+    Se decidió realizar la aplicación usando el lenguaje Lua, más alejado del estándar de Android y sus frameworks que trabajan con Java o Kotlin. Junto a esa decisión, se llegó a la conclusión de usar la plataforma Solar2D, un motor de juegos para dispositivos móviles que trabaja, justamente, usando el lenguaje Lua; esta plataforma ofrece una amplia gama de librerías integradas con las que poder desarrollar juegos y proyectos, además de ser muy intuitiva, sencilla e informativa para desarrolladores con poca o ninguna experiencia en Lua, como ha sido este caso.
 
 
-        \subsection{Módulos empleados}
+    \section{Aplicación Android}
 
-            Los módulos de Lua son como las librerías de cualquier lenguaje de programación.
+        \subsection{Lua}
+        \label{inv:lua}
 
-            Este proyecto ha requerido de los módulos luasql-mysql para crear la conectividad entre Lua y la base de datos MySQL.
+            \nocite{Manual-Lua}
+
+            \begin{figure*}[h]
+            \label{figura:lua}
+
+                \centering
+                \includegraphics[scale=0.05]{images/investigacion/Lua.png}
+                \caption{Logo de Lua}
+
+            \end{figure*}
+
+            Lenguaje de programación extensible, que ofrece buen soporte tanto para programación orientada a objetos, como para la programación funcional y la programación orientada a datos. Se emplea como un lenguaje de script ligero pero potente, para que extienda cualquier programa que lo considere necesario: por tanto, al ser un lenguaje que extiende la función de otro, carece del concepto de programa principal, por lo que funciona embebido al programa anfitrión que lo utiliza.
+
+            Según sus propios creadores, los factores que definen a Lua es su \textbf{potencia}, \textbf{eficiencia}, \textbf{ligereza} e \textbf{integración}.
+
+            \newpage
 
 
-    \section{MySQL}
+        \subsection{Solar2D}
+
+            \begin{figure*}[h]
+            \label{figura:solar2d}
+
+                \centering
+                \includegraphics[scale=0.6]{images/investigacion/Solar2D.png}
+                \caption{Logo de Solar2D}
+
+            \end{figure*}
+
+            Anteriormente conocido como Corona SDK \cite{Corona-Labs}, este motor de juegos 2D usa el lenguaje Lua descrito en la sección \ref{inv:lua}, por lo que era la plataforma ideal para el desarrollo de la aplicación. Su página web amigable, su foro y su abundante documentación, convierten a Solar2D en un motor de juegos bien valorado por los desarrolladores de ese campo, ya que no solo permite que los más experimentados hagan un buen uso de su potencia, sino que aquellos usuarios más novatos puedan integrarse poco a poco y con mucha ayuda disponible en el complejo mundo de la creación de juegos para dispositivos móviles.
+
+            Otro punto fuerte de este motor es su simulador, que permite emular el comportamiento de la aplicación que se esté desarrollando adoptando los cambios en el código casi al instante; además del simulador, ofrece una función llamada \textit{Corona Live Server} que permite trasladar dicho simulador directamente al dispositivo móvil usando la red local a la que esté conectada, esto permite ejecutar y comprobar algunas funciones no disponibles en el simulador (por ejemplo y relacionado con este proyecto, las vista de mapas de Google Maps).
+
+            % Los módulos de Lua son como las librerías de cualquier lenguaje de programación.
+
+            % \paragraph{Módulo}
+
+
+        \subsection{IntelliJ IDEA}
+
+            \nocite{Jetbrains-IntelliJ}
+
+            \begin{figure*}[h]
+            \label{figura:intellij}
+
+                \centering
+                \includegraphics[scale=0.04]{images/investigacion/IntelliJ.png}
+                \caption{Logo de IntelliJ IDEA}
+
+            \end{figure*}
+
+            Entorno de desarrollo integrado (IDE) creado por Jetbrains considerado como uno de los más usados actualmente junto a Visual Studio Code, que cuenta con una amplia cantidad de características y funcionalidades, además de compatibilidad con herramientas de desarrollo como Maven, Gradle, STS... que funcionan de forma inmediata. IntelliJ IDEA está diseñado para mejorar la productividad de sus usuarios con asistencia intuitiva para todos los lenguajes de programación y frameworks.
+
+
+        \subsection{API de Google Maps}
+
+            % TODO: completar más adelante.
+
+            \begin{figure*}[h]
+            \label{figura:api}
+
+                \centering
+                \includegraphics[scale=0.25]{images/investigacion/Maps.png}
+                \caption{Logo de las APIs de Google Maps}
+
+            \end{figure*}
+
+
+    \section{Base de datos}
+
+        \nocite{MySQL}
+
+        \subsection{MySQL}
+
+            \begin{figure*}[h]
+            \label{figura:mysql}
+
+                \centering
+                \includegraphics[scale=0.05]{images/investigacion/MySQL.png}
+                \caption{Logo de MySQL}
+
+            \end{figure*}
+
+            El sistema gestor de bases de datos relacional considerado el más popular del mundo de código abierto, usado por grandes marcas como Google, Facebook, Twitter y Youtube, entre otros.
+
+            Posee una doble licencia pública general / comercial por Oracle Corporation, motivo por el que en 2009 se creó MariaDB \cite{MariaDB}: un fork derivado de MySQL de manos de desarrolladores (algunos de ellos originales de MySQL) que no estaban deacuerdo con que una misma empresa controlase a su vez productos de MySQL y Oracle Database.
+
+
+        \subsection{DataGrip}
+
+            \nocite{Jetbrains-DataGrip}
+
+            \begin{figure*}[h]
+            \label{figura:datagrip}
+
+                \centering
+                \includegraphics[scale=0.035]{images/investigacion/DataGrip.png}
+                \caption{Logo de DataGrip}
+
+            \end{figure*}
+
+
+        Entorno de desarrollo integrado (IDE) creado por Jetbrains para desarrolladores SQL profesionales que gracias a su contexto de base de datos multimotor, permite la ejecución inteligente de consultas y una navegación eficiente por los esquemas. Posee varias características y herramientas avanzadas que facilitan el desarrollo y la transformación de objetos para ajustarse a los lenguajes de programación utilizados en los proyectos.
+
+
+        % \subsection{MySQL Workbench}
+
+
+    \section{Github Copilot}
+
+        \nocite{Copilot}
+
+        \begin{figure*}[h]
+        \label{figura:copilot}
+
+            \centering
+            \includegraphics[scale=0.1]{images/investigacion/Copilot.png}
+            \caption{Logo de Github Copilot}
+
+        \end{figure*}
+
+        GitHub Copilot es una IA asistente diseñada para programar, lo que permite codificar más rápido y con menos trabajo. Incluye más contexto que la mayoría asistentes, por lo que, ya sea sobre un comentario, el nombre de una función o el código mismo, GitHub Copilot usa el contexto que proporcionado y agrega el código en función de lo escrito.
+
+        Está disponible como extensión para Neovim, los IDEs de JetBrains y Visual Studio Code, además de poder usarse en la nube con GitHub Codespaces.
+
+
 
 
 \cleardoublepage
