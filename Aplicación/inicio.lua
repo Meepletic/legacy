@@ -32,7 +32,7 @@ function escena:create(evento)
     local formulario = display.newGroup()
 
     do
-        local marco = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, ancho, 20)
+        local marco = display.newRoundedRect(formulario, centroX, alto * 0.4, ancho * 0.8, alto * 0.5, 20)
         marco:setFillColor(1, 1, 1)
         marco.strokeWidth = 7.5
         marco:setStrokeColor(0, 0, 0)
