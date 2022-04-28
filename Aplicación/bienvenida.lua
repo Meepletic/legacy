@@ -40,8 +40,12 @@ function escena:create(evento)
             label       = "Iniciar sesión",
             fontSize    = ancho / alto,
             labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
-            defaultFile = "Imagenes/boton-azul.png",
-            overFile    = "Imagenes/boton-marcado.png",
+            -- Forma
+            shape           = "roundedRect",
+            cornerRadius    = 40,
+            fillColor       = { default = {0, 0.8, 1}, over = {0, 0, 0, 0.5} },
+            strokeColor     = { default = {0, 0, 0}, over = {0, 0, 0} },
+            strokeWidth     = 7.5,
             -- Posición y tamaño
             x       = centroX,
             y       = alto * 0.6,
@@ -64,8 +68,12 @@ function escena:create(evento)
             label       = "Registrarse",
             fontSize    = ancho / alto,
             labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
-            defaultFile = "Imagenes/boton-verde.png",
-            overFile    = "Imagenes/boton-marcado.png",
+            -- Forma
+            shape           = "roundedRect",
+            cornerRadius    = 40,
+            fillColor       = { default = {1, 0, 1}, over = {0, 0, 0, 0.5} },
+            strokeColor     = { default = {0, 0, 0}, over = {0, 0, 0} },
+            strokeWidth     = 7.5,
             -- Posición y tamaño
             x       = centroX,
             y       = alto * 0.8,

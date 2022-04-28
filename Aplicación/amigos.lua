@@ -34,8 +34,12 @@ function escena:create(evento)
                 label       = "Juegos",
                 fontSize    = ancho / alto,
                 labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
-                defaultFile = "Imagenes/boton-rojo.png",
-                overFile    = "Imagenes/boton-marcado.png",
+                -- Forma
+                shape           = "roundedRect",
+                cornerRadius    = 20,
+                fillColor       = { default = {1, 0, 0}, over = {0, 0, 0, 0.5} },
+                strokeColor     = { default = {0, 0, 0}, over = {0, 0, 0} },
+                strokeWidth     = 5,
                 -- Posición y tamaño
                 x       = centroX - ancho * 0.3,
                 y       = alto * 0.1,
@@ -58,8 +62,12 @@ function escena:create(evento)
                 label       = "Partidas",
                 fontSize    = ancho / alto,
                 labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
-                defaultFile = "Imagenes/boton-amarillo.png",
-                overFile    = "Imagenes/boton-marcado.png",
+                -- Forma
+                shape           = "roundedRect",
+                cornerRadius    = 20,
+                fillColor       = { default = {1, 0.8, 0}, over = {0, 0, 0, 0.5} },
+                strokeColor     = { default = {0, 0, 0}, over = {0, 0, 0} },
+                strokeWidth     = 5,
                 -- Posición y tamaño
                 x       = centroX,
                 y       = alto * 0.1,
@@ -81,7 +89,12 @@ function escena:create(evento)
                 label       = "Amigos",
                 fontSize    = ancho / alto,
                 labelColor  = { default = {0, 0, 0, 0.5} },
-                defaultFile = "Imagenes/boton-marcado.png",
+                -- Forma
+                shape           = "roundedRect",
+                cornerRadius    = 20,
+                fillColor       = { default = {0, 0, 0, 0.5} },
+                strokeColor     = { default = {0, 0, 0} },
+                strokeWidth     = 5,
                 -- Posición y tamaño
                 x       = centroX + ancho * 0.3,
                 y       = alto * 0.1,

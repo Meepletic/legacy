@@ -29,8 +29,12 @@ function escena:create(evento)
             label       = "Perfil",
             fontSize    = ancho / alto,
             labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
-            defaultFile = "Imagenes/boton-amarillo.png",
-            overFile    = "Imagenes/boton-marcado.png",
+            -- Forma
+            shape           = "roundedRect",
+            cornerRadius    = 20,
+            fillColor       = { default = {1, 0.5, 0}, over = {0, 0, 0, 0.5} },
+            strokeColor     = { default = {0, 0, 0}, over = {0, 0, 0} },
+            strokeWidth     = 5,
             -- Posición y tamaño
             x       = centroX,
             y       = alto * 0.1,
