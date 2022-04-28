@@ -3,6 +3,13 @@ local composer  = require("composer")
 local widget    = require("widget")
 
 
+-- Mis accesos directos
+local centroX   = display.contentCenterX
+local centroY   = display.contentCenterY
+local ancho     = display.contentWidth
+local alto      = display.contentHeight
+
+
 -- Crear escena
 local escena = composer.newScene()
 
@@ -12,11 +19,11 @@ function escena:create(evento)
     local vista = self.view
 
     -- Crear un fondo blanco que ocupe toda la pantalla
-    local fondo = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+    local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
     -- Crear texto para mostrar en la escena
-    local titulo = display.newText("Perfil (amigos)", display.contentCenterX, 125, native.systemFont, 32)
+    local titulo = display.newText("Perfil (amigos)", centroX, 125, native.systemFont, 32)
     titulo:setFillColor(0, 0, 0)
 
 
@@ -25,14 +32,15 @@ function escena:create(evento)
             {
                 -- Decoración
                 label       = "Juegos",
-                labelColor  = { default={1, 1, 1}, over={ 0, 0, 0, 0.5 } },
+                fontSize    = ancho / alto,
+                labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
                 defaultFile = "Imagenes/boton-rojo.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX - display.contentWidth * 0.3,
-                y       = display.contentHeight * 0.1,
-                width   = 100,
-                height  = 40,
+                x       = centroX - ancho * 0.3,
+                y       = alto * 0.1,
+                width   = ancho * 0.25,
+                height  = alto * 0.05,
                 -- Función
                 onEvent = function(evento)
                     -- Cargar la escena 'juegos' tras pulsar el botón
@@ -48,14 +56,15 @@ function escena:create(evento)
             {
                 -- Decoración
                 label       = "Partidas",
-                labelColor  = { default={1, 1, 1}, over={ 0, 0, 0, 0.5 } },
+                fontSize    = ancho / alto,
+                labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
                 defaultFile = "Imagenes/boton-amarillo.png",
                 overFile    = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX,
-                y       = display.contentHeight * 0.1,
-                width   = 100,
-                height  = 40,
+                x       = centroX,
+                y       = alto * 0.1,
+                width   = ancho * 0.25,
+                height  = alto * 0.05,
                 -- Función
                 onEvent = function(evento)
                     -- Cargar la escena 'juegos' tras pulsar el botón
@@ -70,13 +79,14 @@ function escena:create(evento)
             {
                 -- Decoración
                 label       = "Amigos",
-                labelColor  = { default={ 0, 0, 0, 0.5 } },
+                fontSize    = ancho / alto,
+                labelColor  = { default = {0, 0, 0, 0.5} },
                 defaultFile = "Imagenes/boton-marcado.png",
                 -- Posición y tamaño
-                x       = display.contentCenterX + display.contentWidth * 0.3,
-                y       = display.contentHeight * 0.1,
-                width   = 100,
-                height  = 40,
+                x       = centroX + ancho * 0.3,
+                y       = alto * 0.1,
+                width   = ancho * 0.25,
+                height  = alto * 0.05,
                 -- Función
                 onEvent = function(evento)
                     -- Cargar la escena 'juegos' tras pulsar el botón

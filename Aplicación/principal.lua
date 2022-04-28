@@ -22,27 +22,28 @@ function escena:create(evento)
     local fondo = display.newRect(centroX, centroY, ancho, alto)
     fondo:setFillColor(1, 1, 1)
 
-    -- Crear un botón para ir a la pantalla 'juegos'
+    -- Crear un botón para ir a la pantalla 'partidas'
     local botonPerfil = widget.newButton(
-            {
-                -- Decoración
-                label       = "Perfil",
-                labelColor  = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
-                defaultFile = "Imagenes/boton-amarillo.png",
-                overFile    = "Imagenes/boton-marcado.png",
-                -- Posición y tamaño
-                x       = centroX,
-                y       = alto * 0.1,
-                width   = 100,
-                height  = 40,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'juegos' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        composer.gotoScene("partidas", { effect = "slideLeft", time = 250 })
-                    end
+        {
+            -- Decoración
+            label       = "Perfil",
+            fontSize    = ancho / alto,
+            labelColor  = { default = {1, 1, 1}, over = {0, 0, 0, 0.5} },
+            defaultFile = "Imagenes/boton-amarillo.png",
+            overFile    = "Imagenes/boton-marcado.png",
+            -- Posición y tamaño
+            x       = centroX,
+            y       = alto * 0.1,
+            width   = ancho * 0.25,
+            height  = alto * 0.05,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'juegos' tras pulsar el botón
+                if evento.phase == "ended" then
+                    composer.gotoScene("partidas", { effect = "slideLeft", time = 250 })
                 end
-            }
+            end
+        }
     )
 
     -- Crear un marco que muestre el nombre de un juego y su descripción
@@ -52,105 +53,128 @@ function escena:create(evento)
         -- Crear el marco de la tarjeta
         local marco = display.newRoundedRect(tarjeta, centroX, alto * 0.45, ancho * 0.8, alto * 0.5, 20)
         marco:setFillColor(1, 1, 1)
-        marco.strokeWidth = 2
+        marco.strokeWidth = 7.5
         marco:setStrokeColor(0, 0, 0)
 
         -- Crear el texto del nombre del juego
         -- local nombre = display.newText(tarjeta, "Juego", marco.x, marco.height * 0.1, native.systemFontBold, 32)
         local nombre = display.newText(
-                { parent = tarjeta,
-                  text = "Juego",
-                  x = marco.x,
-                  y = marco.y,
-                  width = marco.width * 0.9,
-                  height = marco.height * 0.5,
-                  font = native.systemFontBold,
-                  fontSize = 32,
-                  align = "center"
-                }
+            {
+                parent  = tarjeta,
+                -- Decoración
+                text        = "Juego",
+                font        = native.systemFontBold,
+                fontSize    = ancho / alto,
+                align       = "left",
+                -- Posición y tamaño
+                x       = marco.x,
+                y       = marco.y - marco.height * 0.25,
+                width   = ancho * 0.7,
+                height  = marco.height * 0.25
+            }
         )
         nombre:setFillColor(0, 0, 0)
 
         -- Crear el texto de la descripción del juego
         local descripcion = display.newText(
-                { parent    = tarjeta,
-                  text      = "Descripción del juego...",
-                  x         = marco.x,
-                  y         = nombre.y + nombre.y * 0.25,
-                  width     = marco.width * 0.9,
-                  height    = marco.height * 0.5,
-                  font      = native.systemFont,
-                  fontSize  = 14,
-                  align     = "left"
-                }
+            {
+                parent  = tarjeta,
+                -- Decoración
+                text        = "Descripción del juego...",
+                font        = native.systemFont,
+                fontSize    = ancho / alto / 2,
+                align       = "left",
+                -- Posición y tamaño
+                x       = marco.x,
+                y       = marco.y,
+                width   = ancho * 0.7,
+                height  = marco.height * 0.5,
+            }
         )
         descripcion:setFillColor(0, 0, 0)
+
+        -- Crear el texto de la lista de participantes
+        local participantes = display.newText(
+            {
+                parent  = tarjeta,
+                -- Decoración
+                text        = "Participantes:",
+                font        = native.systemFont,
+                fontSize    = ancho / alto / 2,
+                align       = "left",
+                -- Posición y tamaño
+                x       = marco.x,
+                y       = marco.y + marco.height * 0.25,
+                width   = ancho * 0.7,
+                height  = marco.height * 0.25,
+            }
+        )
+        participantes:setFillColor(0, 0, 0)
     end
 
     -- Crear un botón para descartar partidas
     local botonDescartar = widget.newButton(
-            {
-                -- Decoración
-                defaultFile = "Imagenes/partida-descartar.png",
-                overFile    = "Imagenes/partida-descartar-marcado.png",
-                -- Posición y tamaño
-                x       = ancho * 0.25,
-                y       = alto * 0.8,
-                width   = ancho * 0.2,
-                height  = ancho * 0.2,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'juegos' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        -- TODO: Eliminar partida de la tabla de partidas compatibles
-                    end
+        {
+            -- Decoración
+            defaultFile = "Imagenes/partida-descartar.png",
+            overFile    = "Imagenes/partida-descartar-marcado.png",
+            -- Posición y tamaño
+            x       = ancho * 0.25,
+            y       = alto * 0.8,
+            width   = ancho * 0.2,
+            height  = ancho * 0.2,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'juegos' tras pulsar el botón
+                if evento.phase == "ended" then
+                    -- TODO: Eliminar partida de la tabla de partidas compatibles
                 end
-            }
+            end
+        }
     )
 
     -- Crear un botón para aceptar partidas
     local botonAceptar = widget.newButton(
-            {
-                -- Decoración
-                defaultFile = "Imagenes/partida-aceptar.png",
-                overFile    = "Imagenes/partida-aceptar-marcado.png",
-                -- Posición y tamaño
-                x       = ancho * 0.75,
-                y       = alto * 0.8,
-                width   = ancho * 0.2,
-                height  = ancho * 0.2,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'juegos' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        -- TODO: Eliminar partida de la tabla de partidas compatibles y añadirla al historial de partidas
-                    end
+        {
+            -- Decoración
+            defaultFile = "Imagenes/partida-aceptar.png",
+            overFile    = "Imagenes/partida-aceptar-marcado.png",
+            -- Posición y tamaño
+            x       = ancho * 0.75,
+            y       = alto * 0.8,
+            width   = ancho * 0.2,
+            height  = ancho * 0.2,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'juegos' tras pulsar el botón
+                if evento.phase == "ended" then
+                    -- TODO: Eliminar partida de la tabla de partidas compatibles y añadirla al historial de partidas
                 end
-            }
+            end
+        }
     )
 
 
     -- Crear un botón para aceptar partidas
     local botonRecargar = widget.newButton(
-            {
-                -- Decoración
-                defaultFile = "Imagenes/partida-recargar.png",
-                overFile    = "Imagenes/partida-recargar-marcado.png",
-                -- Posición y tamaño
-                x       = centroX,
-                y       = alto * 0.8,
-                width   = ancho * 0.15,
-                height  = ancho * 0.15,
-                -- Función
-                onEvent = function(evento)
-                    -- Cargar la escena 'juegos' tras pulsar el botón
-                    if evento.phase == "ended" then
-                        -- TODO: Solicitar nuevas partidas para mostrar
-                    end
+        {
+            -- Decoración
+            defaultFile = "Imagenes/partida-recargar.png",
+            overFile    = "Imagenes/partida-recargar-marcado.png",
+            -- Posición y tamaño
+            x       = centroX,
+            y       = alto * 0.8,
+            width   = ancho * 0.15,
+            height  = ancho * 0.15,
+            -- Función
+            onEvent = function(evento)
+                -- Cargar la escena 'juegos' tras pulsar el botón
+                if evento.phase == "ended" then
+                    -- TODO: Solicitar nuevas partidas para mostrar
                 end
-            }
+            end
+        }
     )
-
 
     -- Añadir todos los objetos a la vista
     vista:insert(fondo)
