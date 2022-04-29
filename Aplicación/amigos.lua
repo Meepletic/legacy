@@ -162,6 +162,25 @@ function escena:destroy(evento)
     -- TODO
 end
 
+
+-- Ejecuta el contenido al pulsarse una tecla o botón del móvil
+local function pulsacion(evento)
+
+    -- Si se pulsa la tecla 'atrás' ('back') en Android, evita que se salga de la aplicación
+    if (evento.keyName == "back") then
+        if (system.getInfo("platform") == "android") then
+            -- Volver a la escena anterior
+            composer.gotoScene("principal", { effect = "slideRight", time = 250 })
+
+            return true
+        end
+    end
+
+    -- ¡Importante! Devuelve 'falso' para indicar que esta aplicación NO está sobreescribiendo la tecla recibida,
+    -- de esta forma, el sistema operativo ejecutará su gestor predeterminado para la tecla
+    return false
+end
+
 ---------------------------------------------------------------------------------
 
 -- Configuración de los listeners
@@ -169,6 +188,8 @@ escena:addEventListener("create", escena)
 escena:addEventListener("show", escena)
 escena:addEventListener("hide", escena)
 escena:addEventListener("destroy", escena)
+
+Runtime:addEventListener("key", pulsacion)
 
 ---------------------------------------------------------------------------------
 
