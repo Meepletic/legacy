@@ -25,19 +25,6 @@ settings =
 	},
 
 	--
-	-- iOS section
-	--
-	iphone =
-	{
-		xcassets = "Images.xcassets",
-		plist =
-		{
-			UIStatusBarHidden = false,
-			UILaunchStoryboardName = "LaunchScreen",
-		},
-	},
-
-	--
 	-- Plugins section
 	--
 	plugins =
